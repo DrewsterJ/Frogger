@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 320685428956409836}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.02, y: -2.385665, z: -20.64727}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 4.237442, y: 1.788237, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -110,7 +110,7 @@ Transform:
   m_GameObject: {fileID: 1662267944015782721}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.439, y: -2.368, z: -20.658}
+  m_LocalPosition: {x: 2.38, y: 0, z: -0.214}
   m_LocalScale: {x: 0.19882, y: 0.64894, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -177,6 +177,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5340701993390516779}
+  - component: {fileID: 6700800158911481006}
   m_Layer: 0
   m_Name: Crocodile
   m_TagString: Untagged
@@ -202,6 +203,18 @@ Transform:
   - {fileID: 757507248480563765}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6700800158911481006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3914658422637559575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02762fdb5fae5a14ea8918c1226b3671, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3966896614797071558
 GameObject:
   m_ObjectHideFlags: 0
@@ -228,7 +241,7 @@ Transform:
   m_GameObject: {fileID: 3966896614797071558}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.87, y: -2.343, z: -20.64727}
+  m_LocalPosition: {x: 2.64, y: 0, z: 0}
   m_LocalScale: {x: 1.5367138, y: 0.9517102, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
