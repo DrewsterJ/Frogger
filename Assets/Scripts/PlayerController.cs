@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     // Player rigid body
     private Rigidbody2D playerRb;
     private float offset = 0.55f;
+    public GameObject uiDocument;
 
     private void Start()
     {
@@ -49,14 +50,26 @@ public class PlayerController : MonoBehaviour
         {
             if (hit.collider.CompareTag("Water"))
             {
-                var render = GetComponent<SpriteRenderer>();
-                render.enabled = false;
-                Destroy(this);
+                UI uiScript = uiDocument.GetComponent<UI>();
+                uiScript.updateLives();
+
+                if (uiScript.lives <= 0)
+                {
+                    var render = GetComponent<SpriteRenderer>();
+                    render.enabled = false;
+                    Debug.Log("Game Over");
+                    Destroy(this);
+                }
+                else
+                {
+                    transform.position = new Vector3(0, -8.23f, -9.33f);
+                }
             }
             else if (hit.collider.CompareTag("VictorySquare"))
             {
                 transform.position = new Vector3(0, -8.23f, -9.33f);
-                Debug.Log("Victory!");
+                UI uiScript = uiDocument.GetComponent<UI>();
+                uiScript.updateScore();
             }
             else if (!hit.collider.CompareTag("Untagged"))
             {

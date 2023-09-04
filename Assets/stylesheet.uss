@@ -1,0 +1,9 @@
+* {
+    -unity-font: url('project://database/Assets/UI%20Toolkit/UnityThemes/UnityDefaultRuntimeTheme.tss?fileID=2230732570650464555&guid=f3b4c41e9f83db64f9f8e783354df1f8&type=3#NotInter-Regular');
+    font-size: 20px;
+    -unity-font-style: bold;
+    background-color: rgba(0, 255, 51, 0);
+    -unity-background-image-tint-color: rgb(255, 0, 0);
+    color: rgb(200, 0, 14);
+    -unity-text-outline-width: 20px;
+}
