@@ -8,7 +8,7 @@ public class SpawnManager : MonoBehaviour
     public List<GameObject> rightMovingSpawnPoints;
     public List<GameObject> leftMovingGameObjects;
     public List<GameObject> rightMovingGameObjects;
-    private float spawnRate = 1.5f;
+    private float spawnRate = 1.2f;
     private bool gameIsActive = false;
     
     // Start is called before the first frame update
