@@ -42,8 +42,40 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision other)
+    private void FixedUpdate()
     {
-        Debug.Log("Collided!");
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))
+        {
+            if (hit.collider.CompareTag("Water"))
+            {
+                var render = GetComponent<SpriteRenderer>();
+                render.enabled = false;
+                Destroy(this);
+            }
+            else if (!hit.collider.CompareTag("Untagged"))
+            {
+                var component = hit.collider.GetComponent<MoveForward>();
+                var direction = new Vector2();
+                if (component.leftFacing)
+                {
+                    direction = Vector2.left * (Time.deltaTime * component.speed);
+                }
+                else
+                {
+                    direction = Vector2.right * (Time.deltaTime * component.speed);
+                }
+                
+                transform.Translate(direction);
+            }
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
     }
 }
