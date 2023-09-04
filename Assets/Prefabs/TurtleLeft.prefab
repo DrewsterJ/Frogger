@@ -56,6 +56,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6989013317011281117, guid: 6036ba15f99d15c40bca9ed269e267db, type: 3}
+      propertyPath: m_Size.z
+      value: 1.536518
+      objectReference: {fileID: 0}
+    - target: {fileID: 6989013317011281117, guid: 6036ba15f99d15c40bca9ed269e267db, type: 3}
+      propertyPath: m_Center.z
+      value: -0.0042752624
+      objectReference: {fileID: 0}
     - target: {fileID: 8609539650889261661, guid: 6036ba15f99d15c40bca9ed269e267db, type: 3}
       propertyPath: m_Name
       value: TurtleLeft
