@@ -41,4 +41,9 @@ public class PlayerController : MonoBehaviour
             transform.Translate(Vector2.down + new Vector2(0, -offset));
         }
     }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        Debug.Log("Collided!");
+    }
 }
