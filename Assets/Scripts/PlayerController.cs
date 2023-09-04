@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
 {
     // Player rigid body
     private Rigidbody2D playerRb;
-    private float offset = 0.45f;
+    private float offset = 0.55f;
 
     private void Start()
     {
@@ -52,6 +52,11 @@ public class PlayerController : MonoBehaviour
                 var render = GetComponent<SpriteRenderer>();
                 render.enabled = false;
                 Destroy(this);
+            }
+            else if (hit.collider.CompareTag("VictorySquare"))
+            {
+                transform.position = new Vector3(0, -8.23f, -9.33f);
+                Debug.Log("Victory!");
             }
             else if (!hit.collider.CompareTag("Untagged"))
             {
