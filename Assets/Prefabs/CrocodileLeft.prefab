@@ -16,6 +16,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: -2.61
       objectReference: {fileID: 0}
+    - target: {fileID: 3640093562975768806, guid: b508bef6980222646a5e456ec2b41e3b, type: 3}
+      propertyPath: m_Size.x
+      value: 5.6716747
+      objectReference: {fileID: 0}
+    - target: {fileID: 3640093562975768806, guid: b508bef6980222646a5e456ec2b41e3b, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.623484
+      objectReference: {fileID: 0}
     - target: {fileID: 3914658422637559575, guid: b508bef6980222646a5e456ec2b41e3b, type: 3}
       propertyPath: m_Name
       value: CrocodileLeft
