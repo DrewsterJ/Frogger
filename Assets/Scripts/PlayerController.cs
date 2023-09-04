@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
 {
     // Player rigid body
     private Rigidbody2D playerRb;
-    private float offset = 0.45f;
+    private float offset = 0.55f;
 
     private void Start()
     {
@@ -40,5 +40,47 @@ public class PlayerController : MonoBehaviour
         {
             transform.Translate(Vector2.down + new Vector2(0, -offset));
         }
+    }
+
+    private void FixedUpdate()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))
+        {
+            if (hit.collider.CompareTag("Water"))
+            {
+                var render = GetComponent<SpriteRenderer>();
+                render.enabled = false;
+                Destroy(this);
+            }
+            else if (hit.collider.CompareTag("VictorySquare"))
+            {
+                transform.position = new Vector3(0, -8.23f, -9.33f);
+                Debug.Log("Victory!");
+            }
+            else if (!hit.collider.CompareTag("Untagged"))
+            {
+                var component = hit.collider.GetComponent<MoveForward>();
+                var direction = new Vector2();
+                if (component.leftFacing)
+                {
+                    direction = Vector2.left * (Time.deltaTime * component.speed);
+                }
+                else
+                {
+                    direction = Vector2.right * (Time.deltaTime * component.speed);
+                }
+                
+                transform.Translate(direction);
+            }
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
     }
 }

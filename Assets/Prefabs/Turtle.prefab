@@ -110,8 +110,8 @@ Transform:
   m_GameObject: {fileID: 7682782724179532522}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.1}
-  m_LocalScale: {x: 2.357489, y: 2.2256, z: 1}
+  m_LocalPosition: {x: 0.282, y: 0, z: -0.1}
+  m_LocalScale: {x: 1.8534862, y: 1.788237, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5850461916821890741}
@@ -178,9 +178,10 @@ GameObject:
   m_Component:
   - component: {fileID: 5850461916821890741}
   - component: {fileID: 507460807568785253}
+  - component: {fileID: 6989013317011281117}
   m_Layer: 0
   m_Name: Turtle
-  m_TagString: Untagged
+  m_TagString: Turtle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -214,3 +215,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02762fdb5fae5a14ea8918c1226b3671, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 5
+  leftFacing: 0
+--- !u!65 &6989013317011281117
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8609539650889261661}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.1285696, y: 2.0780525, z: 0.36538893}
+  m_Center: {x: 0.31168562, y: -0.027607203, z: -0.050361812}

@@ -178,9 +178,10 @@ GameObject:
   m_Component:
   - component: {fileID: 5340701993390516779}
   - component: {fileID: 6700800158911481006}
+  - component: {fileID: 3187431393431656220}
   m_Layer: 0
   m_Name: Crocodile
-  m_TagString: Untagged
+  m_TagString: Crocodile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -215,6 +216,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02762fdb5fae5a14ea8918c1226b3671, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  leftFacing: 0
+--- !u!65 &3187431393431656220
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3914658422637559575}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 5.667553, y: 1.8931408, z: 0.3126475}
+  m_Center: {x: 0.6608949, y: -0.005282998, z: -0.11254642}
 --- !u!1 &3966896614797071558
 GameObject:
   m_ObjectHideFlags: 0
