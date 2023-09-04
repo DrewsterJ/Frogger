@@ -53,7 +53,7 @@ public class PlayerController : MonoBehaviour
                 UI uiScript = uiDocument.GetComponent<UI>();
                 uiScript.updateLives();
 
-                if (uiScript.lives < 0)
+                if (uiScript.lives <= 0)
                 {
                     var render = GetComponent<SpriteRenderer>();
                     render.enabled = false;
