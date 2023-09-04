@@ -1,0 +1,5 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/stylesheet.uss?fileID=7433441132597879392&amp;guid=d8344cfc0b6bf114cb44f7cdb2325bda&amp;type=3#stylesheet" />
+    <ui:Label tabindex="-1" text="Lives: " parse-escape-sequences="true" display-tooltip-when-elided="true" name="livesText" style="position: relative; top: auto; left: auto; margin-left: 15px;" />
+    <ui:Label tabindex="-1" text="Score: " parse-escape-sequences="true" display-tooltip-when-elided="true" name="scoreText" style="height: 28px; width: 1282px; -unity-text-align: upper-left; white-space: nowrap; text-overflow: clip; right: auto; position: relative; top: auto; left: auto; margin-left: 15px;" />
+</ui:UXML>
