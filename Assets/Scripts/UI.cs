@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -10,6 +11,7 @@ public class UI : MonoBehaviour
 
     private Label livesText;
     private Label scoreText;
+    private List<VisualElement> hearts = new List<VisualElement>();
     public VisualElement root;
     
     // Start is called before the first frame update
@@ -18,6 +20,10 @@ public class UI : MonoBehaviour
         root = GetComponent<UIDocument>().rootVisualElement;
         livesText = root.Query<Label>("livesText");
         scoreText = root.Query<Label>("scoreText");
+        GroupBox heartsContainer = root.Query<GroupBox>("heartsGroup");
+        hearts.Add(root.Query<VisualElement>("heartOne"));
+        hearts.Add(root.Query<VisualElement>("heartTwo"));
+        hearts.Add(root.Query<VisualElement>("heartThree"));
         lives = 3;
         score = 0;
         scoreText.text = "Score: " + score;
@@ -32,7 +38,10 @@ public class UI : MonoBehaviour
 
     public void updateLives()
     {
+        Debug.Log(hearts.Count);
         lives -= 1;
+        hearts[lives].SetEnabled(false);
+        hearts.RemoveAt(lives);
         livesText.text = "Lives: " + lives;
     }
 }
