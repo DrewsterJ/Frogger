@@ -223,7 +223,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -462,7 +462,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 023f30ed45aff294bb3becf2a0ed3fd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiDocument: {fileID: 1291599718}
+  uiOverlay: {fileID: 1291599718}
 --- !u!65 &142622111
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -585,11 +585,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a71e41d4f626894983643917f1724c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leftMovingSpawnPoints:
+  rightSideSpawnPoints:
   - {fileID: 1146198151}
   - {fileID: 553188755}
   - {fileID: 1109666749}
-  rightMovingSpawnPoints:
+  leftSideSpawnPoints:
   - {fileID: 1989954226}
   - {fileID: 1301389906}
   - {fileID: 1339180135}
@@ -978,7 +978,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -1084,7 +1084,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -1460,7 +1460,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -2094,7 +2094,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -2375,7 +2375,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3

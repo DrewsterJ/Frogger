@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: leftFacing
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -6283942811846554949, guid: 50c7ad4ac50c7d74d85ab04dc3e3c1e9, type: 3}
+      propertyPath: leftMoving
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2298643620857175868, guid: 50c7ad4ac50c7d74d85ab04dc3e3c1e9, type: 3}
       propertyPath: m_Name
       value: LogLeft

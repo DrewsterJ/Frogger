@@ -5,18 +5,33 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    // Player rigid body
-    private Rigidbody2D playerRb;
-    private float offset = 0.55f;
-    public GameObject uiDocument;
+    // Offset for moving the character object
+    private const float offset = 0.55f;
+    
+    // Game UI overlay objects
+    public GameObject uiOverlay;
+    private UI uiScript;
+    
+    // Start location
+    private readonly Vector3 startLocation = new Vector3(0, -8.23f, -9.33f);
 
     private void Start()
     {
-        playerRb = GetComponent<Rigidbody2D>();
+        uiScript = uiOverlay.GetComponent<UI>();
+    }
+    
+    void Update()
+    {
+        HandleInput();
+    }
+    
+    private void FixedUpdate()
+    {
+        HandleCollisions();
     }
 
-    // Update is called once per frame
-    void Update()
+    // Handles user input
+    public void HandleInput()
     {
         // Move left
         if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
@@ -43,57 +58,58 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
+    private void HandleWaterCollision()
     {
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))
-        {
-            if (hit.collider.CompareTag("Water"))
-            {
-                UI uiScript = uiDocument.GetComponent<UI>();
-                uiScript.updateLives();
+        uiScript.updateLives();
 
-                if (uiScript.lives <= 0)
-                {
-                    var render = GetComponent<SpriteRenderer>();
-                    render.enabled = false;
-                    Debug.Log("Game Over");
-                    Destroy(this);
-                }
-                else
-                {
-                    transform.position = new Vector3(0, -8.23f, -9.33f);
-                }
-            }
-            else if (hit.collider.CompareTag("VictorySquare"))
-            {
-                transform.position = new Vector3(0, -8.23f, -9.33f);
-                UI uiScript = uiDocument.GetComponent<UI>();
-                uiScript.updateScore();
-            }
-            else if (!hit.collider.CompareTag("Untagged"))
-            {
-                var component = hit.collider.GetComponent<MoveForward>();
-                var direction = new Vector2();
-                if (component.leftFacing)
-                {
-                    direction = Vector2.left * (Time.deltaTime * component.speed);
-                }
-                else
-                {
-                    direction = Vector2.right * (Time.deltaTime * component.speed);
-                }
-                
-                transform.Translate(direction);
-            }
+        if (uiScript.lives <= 0)
+        {
+            var spriteRenderer = GetComponent<SpriteRenderer>();
+            spriteRenderer.enabled = false;
+            Destroy(this);
+        }
+        else
+        {
+            transform.position = startLocation;
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void HandleVictorySquareCollision(Collider victorySquare)
     {
+        uiScript.updateScore();
+        transform.position = startLocation;
     }
 
-    private void OnTriggerExit(Collider other)
+    private void HandleFloatingObjectCollision(Collider floatingObject)
     {
+        var floatingObjectScript = floatingObject.GetComponent<MoveForward>();
+        if (floatingObjectScript.leftMoving)
+        {
+            transform.Translate(Vector2.left * (Time.deltaTime * floatingObjectScript.speed));
+        }
+        else
+        {
+            transform.Translate(Vector2.right * (Time.deltaTime * floatingObjectScript.speed));
+        }
+    }
+
+    // Controls game logic when player object collides with other game objects
+    private void HandleCollisions()
+    {
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out RaycastHit hit, Mathf.Infinity))
+        {
+            if (hit.collider.CompareTag("Water"))
+            {
+                HandleWaterCollision();
+            }
+            else if (hit.collider.CompareTag("VictorySquare"))
+            {
+                HandleVictorySquareCollision(hit.collider);
+            }
+            else if (!hit.collider.CompareTag("Untagged"))
+            {
+                HandleFloatingObjectCollision(hit.collider);
+            }
+        }
     }
 }
