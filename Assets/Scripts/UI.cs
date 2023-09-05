@@ -12,6 +12,15 @@ public class UI : MonoBehaviour
     private Label scoreText;
     private List<VisualElement> hearts = new List<VisualElement>();
     public VisualElement root;
+
+    [HideInInspector]
+    public Label pauseMenuLabel;
+
+    public GameObject gameManager;
+    private GameManager gameManagerScript;
+    
+    [HideInInspector]
+    public VisualElement pauseMenu;
     
     void Start()
     {
@@ -20,16 +29,29 @@ public class UI : MonoBehaviour
         hearts.Add(root.Query<VisualElement>("heartOne"));
         hearts.Add(root.Query<VisualElement>("heartTwo"));
         hearts.Add(root.Query<VisualElement>("heartThree"));
+        pauseMenu = root.Query<VisualElement>("pauseMenu");
+        pauseMenu.visible = false;
         scoreText.text = "Score: " + score;
+        pauseMenuLabel = root.Query<Label>("pauseMenuLabel");
+        pauseMenuLabel.visible = false;
+
+        Button resumeButton = root.Query<Button>("resumeButton");
+        Button settingsButton = root.Query<Button>("settingsButton");
+        Button quitButton = root.Query<Button>("quitButton");
+
+        gameManagerScript = gameManager.GetComponent<GameManager>();
+
+        resumeButton.clicked += () => gameManagerScript.SwitchPause();
+        quitButton.clicked += Application.Quit;
     }
 
-    public void updateScore()
+    public void UpdateScore()
     {
         score += 1;
         scoreText.text = "Score: " + score;
     }
 
-    public void updateLives()
+    public void UpdateLives()
     {
         if (lives <= 0) return;
         

@@ -11,6 +11,9 @@ public class SpawnManager : MonoBehaviour
     private const float spawnRate = 1.2f;
     private bool gameIsActive;
     
+    [HideInInspector]
+    public static bool paused;
+    
     void Start()
     {
         gameIsActive = true;
@@ -48,6 +51,11 @@ public class SpawnManager : MonoBehaviour
         while (gameIsActive)
         {
             yield return new WaitForSeconds(spawnRate);
+            if (paused)
+            {
+                continue;
+            }
+
             var rightSideSpawn = (Random.Range(0, 2) == 0);
 
             if (rightSideSpawn)

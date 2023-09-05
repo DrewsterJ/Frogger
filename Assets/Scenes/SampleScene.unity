@@ -1963,6 +1963,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lives: 3
   score: 0
+  gameManager: {fileID: 1620324543}
 --- !u!1 &1301389906
 GameObject:
   m_ObjectHideFlags: 0
@@ -2544,6 +2545,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f92e073d2dae9514d93d9dee0d86e27f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiOverlay: {fileID: 1291599718}
 --- !u!4 &1620324545
 Transform:
   m_ObjectHideFlags: 0
