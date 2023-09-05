@@ -18,12 +18,6 @@ public class SpawnManager : MonoBehaviour
         StartCoroutine(spawnEntities());
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     IEnumerator spawnEntities()
     {
         while (gameIsActive)

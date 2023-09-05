@@ -6,11 +6,6 @@ public class MoveForward : MonoBehaviour
 {
     public float speed = 5.0f;
     public bool leftFacing = false;
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
 
     // Update is called once per frame
     void Update()
