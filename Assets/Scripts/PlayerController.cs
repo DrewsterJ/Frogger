@@ -14,6 +14,9 @@ public class PlayerController : MonoBehaviour
     
     // Start location
     private readonly Vector3 startLocation = new Vector3(0, -8.23f, -9.33f);
+    
+    [HideInInspector]
+    public static bool paused;
 
     private void Start()
     {
@@ -22,11 +25,15 @@ public class PlayerController : MonoBehaviour
     
     void Update()
     {
+        if (paused) return;
+        
         HandleInput();
     }
     
     private void FixedUpdate()
     {
+        if (paused) return;
+        
         HandleCollisions();
     }
 
