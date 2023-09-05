@@ -7,3 +7,8 @@
     color: rgb(200, 0, 14);
     -unity-text-outline-width: 20px;
 }
+
+.button :hover {
+    -unity-background-image-tint-color: rgb(255, 0, 0);
+    background-color: rgb(217, 217, 217);
+}
