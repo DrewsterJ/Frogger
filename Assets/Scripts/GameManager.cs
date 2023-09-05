@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public MoveForward moveForwardScript;
-    public SpawnManager spawnManagerScript;
-    public PlayerController playerControllerScript;
+    public GameObject uiOverlay;
+    private UI uiScript;
     
     [HideInInspector]
     public static bool paused;
@@ -14,7 +13,16 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        uiScript = uiOverlay.GetComponent<UI>();
+    }
+
+    public void SwitchPause()
+    {
+        paused = !paused;
+        MoveForward.paused = paused;
+        SpawnManager.paused = paused;
+        PlayerController.paused = paused;
+        uiScript.pauseMenu.visible = paused;
     }
 
     // Update is called once per frame
@@ -22,10 +30,7 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Escape))
         {
-            paused = !paused;
-            MoveForward.paused = paused;
-            SpawnManager.paused = paused;
-            PlayerController.paused = paused;
+            SwitchPause();
         }
     }
 }
