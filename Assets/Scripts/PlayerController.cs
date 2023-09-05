@@ -67,7 +67,7 @@ public class PlayerController : MonoBehaviour
 
     private void HandleWaterCollision()
     {
-        uiScript.updateLives();
+        uiScript.UpdateLives();
 
         if (uiScript.lives <= 0)
         {
@@ -83,7 +83,7 @@ public class PlayerController : MonoBehaviour
 
     private void HandleVictorySquareCollision(Collider victorySquare)
     {
-        uiScript.updateScore();
+        uiScript.UpdateScore();
         transform.position = startLocation;
     }
 
