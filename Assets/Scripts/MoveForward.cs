@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,12 +6,12 @@ using UnityEngine;
 public class MoveForward : MonoBehaviour
 {
     public float speed = 5.0f;
-    public bool leftFacing = false;
+    public bool leftMoving;
 
     // Update is called once per frame
     void Update()
     {
-        if (leftFacing)
+        if (leftMoving)
         {
             transform.Translate(Vector2.left * (Time.deltaTime * speed));
         }

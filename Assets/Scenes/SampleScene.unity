@@ -585,11 +585,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a71e41d4f626894983643917f1724c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leftMovingSpawnPoints:
+  rightSideSpawnPoints:
   - {fileID: 1146198151}
   - {fileID: 553188755}
   - {fileID: 1109666749}
-  rightMovingSpawnPoints:
+  leftSideSpawnPoints:
   - {fileID: 1989954226}
   - {fileID: 1301389906}
   - {fileID: 1339180135}

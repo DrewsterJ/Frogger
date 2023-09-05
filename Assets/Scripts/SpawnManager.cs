@@ -4,44 +4,59 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-    public List<GameObject> leftMovingSpawnPoints;
-    public List<GameObject> rightMovingSpawnPoints;
+    public List<GameObject> rightSideSpawnPoints;
+    public List<GameObject> leftSideSpawnPoints;
     public List<GameObject> leftMovingGameObjects;
     public List<GameObject> rightMovingGameObjects;
-    private float spawnRate = 1.2f;
-    private bool gameIsActive = false;
+    private const float spawnRate = 1.2f;
+    private bool gameIsActive;
     
-    // Start is called before the first frame update
     void Start()
     {
         gameIsActive = true;
         StartCoroutine(spawnEntities());
     }
 
-    IEnumerator spawnEntities()
+    private void SpawnLeftMovingEntity()
+    {
+        if (!gameIsActive) return;
+        
+        var index = Random.Range(0, rightSideSpawnPoints.Count);
+        var spawnPoint = rightSideSpawnPoints[index];
+
+        index = Random.Range(0, leftMovingGameObjects.Count);
+        var entity = leftMovingGameObjects[index];
+
+        Instantiate(entity, spawnPoint.transform.position, spawnPoint.transform.rotation);
+    }
+
+    private void SpawnRightMovingEntity()
+    {
+        if (!gameIsActive) return;
+        
+        var index = Random.Range(0, leftSideSpawnPoints.Count);
+        var spawnPoint = leftSideSpawnPoints[index];
+
+        index = Random.Range(0, rightMovingGameObjects.Count);
+        var entity = rightMovingGameObjects[index];
+
+        Instantiate(entity, spawnPoint.transform.position, spawnPoint.transform.rotation);
+    }
+
+    private IEnumerator spawnEntities()
     {
         while (gameIsActive)
         {
             yield return new WaitForSeconds(spawnRate);
-            bool leftFacingSpawn = (Random.Range(0, 2) == 0);
+            var rightSideSpawn = (Random.Range(0, 2) == 0);
 
-            if (gameIsActive)
+            if (rightSideSpawn)
             {
-                if (leftFacingSpawn)
-                {
-                    int spawnIndex = Random.Range(0, leftMovingSpawnPoints.Count);
-                    int entityIndex = Random.Range(0, leftMovingGameObjects.Count);
-                    Instantiate(leftMovingGameObjects[entityIndex], leftMovingSpawnPoints[spawnIndex].transform.position,
-                        leftMovingSpawnPoints[spawnIndex].transform.rotation);
-                }
-                else
-                {
-                    int spawnIndex = Random.Range(0, rightMovingSpawnPoints.Count);
-                    int entityIndex = Random.Range(0, rightMovingGameObjects.Count);
-                    Instantiate(rightMovingGameObjects[entityIndex],
-                        rightMovingSpawnPoints[spawnIndex].transform.position,
-                        rightMovingSpawnPoints[spawnIndex].transform.rotation);
-                }
+                SpawnLeftMovingEntity();
+            }
+            else
+            {
+                SpawnRightMovingEntity();
             }
         }
     }
