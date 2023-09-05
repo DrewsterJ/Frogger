@@ -12,3 +12,6 @@
     -unity-background-image-tint-color: rgb(255, 0, 0);
     background-color: rgb(217, 217, 217);
 }
+
+.button {
+}

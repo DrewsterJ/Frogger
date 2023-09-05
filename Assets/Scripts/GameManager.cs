@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
         MoveForward.paused = paused;
         SpawnManager.paused = paused;
         PlayerController.paused = paused;
+        uiScript.pauseMenuLabel.visible = paused;
         uiScript.pauseMenu.visible = paused;
     }
 
