@@ -18,9 +18,13 @@ public class PlayerController : MonoBehaviour
     [HideInInspector]
     public static bool paused;
 
+    public GameObject camera;
+    private AudioControl audioControlScript;
+
     private void Start()
     {
         uiScript = uiOverlay.GetComponent<UI>();
+        audioControlScript = camera.GetComponent<AudioControl>();
     }
     
     void Update()
@@ -44,39 +48,47 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
         {
             transform.Translate(Vector2.left + new Vector2(-offset, 0));
+            PlaySounds();
         }
 
         // Move right
         else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
         {
             transform.Translate(Vector2.right + new Vector2(offset, 0));
+            PlaySounds();
         }
 
         // Move up
         if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
         {
             transform.Translate(Vector2.up + new Vector2(0, offset));
+            PlaySounds();
         }
 
         // Move down
         else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
         {
             transform.Translate(Vector2.down + new Vector2(0, -offset));
+            PlaySounds();
         }
     }
 
     private void HandleWaterCollision()
     {
         uiScript.UpdateLives();
-
+        
         if (uiScript.lives <= 0)
         {
+            audioControlScript.diedAudio.Play();
             var spriteRenderer = GetComponent<SpriteRenderer>();
             spriteRenderer.enabled = false;
+            audioControlScript.gameplayMusic[audioControlScript.activeSongIndex].Stop();
+            audioControlScript.diedMusic.Play();
             Destroy(this);
         }
         else
         {
+            audioControlScript.waterHurtAudio.Play();
             transform.position = startLocation;
         }
     }
@@ -84,6 +96,12 @@ public class PlayerController : MonoBehaviour
     private void HandleVictorySquareCollision(Collider victorySquare)
     {
         uiScript.UpdateScore();
+
+        if (uiScript.score == 3)
+        {
+            audioControlScript.wonMusic.Play();
+        }
+        audioControlScript.scoreAudio.Play();
         transform.position = startLocation;
     }
 
@@ -100,6 +118,32 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    // Plays sounds based on player movement
+    private void PlaySounds()
+    {
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out RaycastHit hit,
+                Mathf.Infinity))
+        {
+            if (hit.collider.CompareTag("Water"))
+            {
+                audioControlScript.waterHurtAudio.Play();
+            }
+            else if (hit.collider.CompareTag("VictorySquare"))
+            {
+                audioControlScript.scoreAudio.Play();
+            }
+            else if (hit.collider.CompareTag("Turtle") || hit.collider.CompareTag("Crocodile") ||
+                     hit.collider.CompareTag("Log"))
+            {
+                audioControlScript.otherMovementAudio.Play();
+            }
+            else
+            {
+                audioControlScript.grassMovementAudio.Play();
+            }
+        }
+    }
+
     // Controls game logic when player object collides with other game objects
     private void HandleCollisions()
     {
@@ -113,7 +157,7 @@ public class PlayerController : MonoBehaviour
             {
                 HandleVictorySquareCollision(hit.collider);
             }
-            else if (!hit.collider.CompareTag("Untagged"))
+            else if (hit.collider.CompareTag("Turtle") || hit.collider.CompareTag("Crocodile") || hit.collider.CompareTag("Log"))
             {
                 HandleFloatingObjectCollision(hit.collider);
             }
