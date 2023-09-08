@@ -6,6 +6,9 @@ public class GameManager : MonoBehaviour
 {
     public GameObject uiOverlay;
     private UI uiScript;
+
+    public GameObject camera;
+    private AudioControl audioControlScript;
     
     [HideInInspector]
     public static bool paused;
@@ -14,6 +17,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         uiScript = uiOverlay.GetComponent<UI>();
+        audioControlScript = camera.GetComponent<AudioControl>();
     }
 
     public void SwitchPause()
@@ -24,6 +28,17 @@ public class GameManager : MonoBehaviour
         PlayerController.paused = paused;
         uiScript.pauseMenuLabel.visible = paused;
         uiScript.pauseMenu.visible = paused;
+
+        if (paused)
+        {
+            audioControlScript.pauseMenuMusic.Play();
+            audioControlScript.gameplayMusic[audioControlScript.activeSongIndex].Stop();
+        }
+        else
+        {
+            audioControlScript.pauseMenuMusic.Stop();
+            audioControlScript.gameplayMusic[audioControlScript.activeSongIndex].Play();
+        }
     }
 
     // Update is called once per frame
