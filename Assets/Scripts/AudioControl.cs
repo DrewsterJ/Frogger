@@ -16,6 +16,7 @@ public class AudioControl : MonoBehaviour
     public AudioSource scoreAudio;
     public List<AudioSource> gameplayMusic;
 
+    public bool muted = false;
     public int activeSongIndex;
     
     // Start is called before the first frame update
@@ -24,9 +25,38 @@ public class AudioControl : MonoBehaviour
         activeSongIndex = Random.Range(0, gameplayMusic.Count);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void PlayNextGameplaySong()
     {
-        
+        gameplayMusic[activeSongIndex].Stop();
+        activeSongIndex += 1;
+        if (activeSongIndex >= gameplayMusic.Count)
+        {
+            activeSongIndex = 0;
+        }
+
+        if (!GameManager.paused && GameManager.gameStarted)
+        {
+            gameplayMusic[activeSongIndex].Play();
+        }
+    }
+
+    public void MuteMusic()
+    {
+        muted = true;
+        foreach (var song in gameplayMusic)
+        {
+            song.volume = 0;
+        }
+        mainMenuMusic.volume = 0;
+    }
+
+    public void UnmuteMusic()
+    {
+        muted = false;
+        foreach (var song in gameplayMusic)
+        {
+            song.volume = 0.05f;
+        }
+        mainMenuMusic.volume = 0.03f;
     }
 }
