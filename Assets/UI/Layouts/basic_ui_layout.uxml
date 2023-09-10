@@ -25,4 +25,9 @@
     </ui:VisualElement>
     <ui:Label tabindex="-1" text="You won!" parse-escape-sequences="true" display-tooltip-when-elided="true" name="victoryMenuLabel" style="position: absolute; top: 127px; left: 569px; height: 40px; width: 215px; -unity-text-align: upper-center; color: rgb(0, 0, 0); font-size: 26px; -unity-text-outline-width: 1px; visibility: hidden;" />
     <ui:Label tabindex="-1" text="You lost" parse-escape-sequences="true" display-tooltip-when-elided="true" name="lossMenuLabel" style="position: absolute; top: 127px; left: 569px; height: 40px; width: 215px; -unity-text-align: upper-center; color: rgb(0, 0, 0); font-size: 26px; -unity-text-outline-width: 1px; visibility: hidden;" />
+    <ui:VisualElement name="settingsMenu" focusable="false" class="button" style="flex-grow: 1; position: absolute; height: 220px; width: 223px; top: 193px; left: 568px; right: auto; align-items: stretch; justify-content: center; background-color: rgb(202, 154, 22); visibility: hidden;">
+        <ui:Button text="Mute Music" parse-escape-sequences="true" display-tooltip-when-elided="true" name="muteUnmuteMusicButton" class="button" style="color: rgb(0, 0, 0);" />
+        <ui:Button text="Play Next Song" parse-escape-sequences="true" display-tooltip-when-elided="true" name="playNextSongButton" class="button" style="color: rgb(0, 0, 0);" />
+        <ui:Button text="Return" parse-escape-sequences="true" display-tooltip-when-elided="true" name="closeSettingsMenuButton" class="button" style="color: rgb(0, 0, 0);" />
+    </ui:VisualElement>
 </ui:UXML>

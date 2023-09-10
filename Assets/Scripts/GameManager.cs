@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour
     
     [HideInInspector]
     public static bool paused;
+
+    public static bool gameStarted;
     
     [HideInInspector]
     public static bool gameWon;
@@ -32,6 +34,7 @@ public class GameManager : MonoBehaviour
         audioControlScript = camera.GetComponent<AudioControl>();
         spawnManagerScript = spawnManager.GetComponent<SpawnManager>();
         playerControllerScript = player.GetComponent<PlayerController>();
+        gameStarted = false;
         
         paused = true;
         MoveForward.paused = true;
@@ -43,6 +46,7 @@ public class GameManager : MonoBehaviour
         audioControlScript.mainMenuMusic.Play();
         gameWon = false;
         gameLost = false;
+        
     }
 
     public void StartGame()
@@ -58,6 +62,7 @@ public class GameManager : MonoBehaviour
         audioControlScript.diedMusic.Stop();
         uiScript.lossMenuLabel.visible = false;
         gameWon = false;
+        gameStarted = true;
     }
 
     public void RestartGame()
@@ -116,11 +121,17 @@ public class GameManager : MonoBehaviour
         uiScript.victoryMenu.visible = false;
         uiScript.lossMenuLabel.visible = false;
         audioControlScript.diedMusic.Stop();
+        gameStarted = false;
 
         foreach (var heartImage in uiScript.hearts)
         {
             heartImage.SetEnabled(true);
         }
+    }
+
+    public void SwitchSettings()
+    {
+        uiScript.settingsMenu.visible = !uiScript.settingsMenu.visible;
     }
 
     public void SwitchPause()
@@ -131,6 +142,7 @@ public class GameManager : MonoBehaviour
         PlayerController.paused = paused;
         uiScript.pauseMenuLabel.visible = paused;
         uiScript.pauseMenu.visible = paused;
+        uiScript.settingsMenu.visible = false;
 
         if (paused)
         {
@@ -147,7 +159,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Escape) && gameWon == false && gameLost == false)
+        if ((Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Escape)) && gameWon == false && gameLost == false && gameStarted == true)
         {
             SwitchPause();
         }
