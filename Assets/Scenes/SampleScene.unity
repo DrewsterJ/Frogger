@@ -407,7 +407,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 244cb2bfbce26a2409a82c4aa995e7c6, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.07
+  m_Volume: 0.03
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -591,9 +591,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiOverlay: {fileID: 1291599718}
-  playerProvidedInput: 0
   camera: {fileID: 519420028}
-  prevPosition: {x: 0, y: 0, z: 0}
 --- !u!65 &142622111
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -860,6 +858,7 @@ MonoBehaviour:
   - {fileID: 3914658422637559575, guid: b508bef6980222646a5e456ec2b41e3b, type: 3}
   - {fileID: 2298643620857175868, guid: 50c7ad4ac50c7d74d85ab04dc3e3c1e9, type: 3}
   - {fileID: 8609539650889261661, guid: 6036ba15f99d15c40bca9ed269e267db, type: 3}
+  spawnedEntities: []
 --- !u!4 &339087681
 Transform:
   m_ObjectHideFlags: 0
@@ -1425,7 +1424,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 15e6eff2f81ecbf478207526b0cee5c9, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.07
+  m_Volume: 0
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -3772,6 +3771,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiOverlay: {fileID: 1291599718}
   camera: {fileID: 519420028}
+  spawnManager: {fileID: 339087679}
+  player: {fileID: 142622107}
 --- !u!4 &1620324545
 Transform:
   m_ObjectHideFlags: 0
