@@ -73,6 +73,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void MoveBackToStart()
+    {
+        transform.position = startLocation;
+    }
+
     private void HandleWaterCollision()
     {
         uiScript.UpdateLives();
