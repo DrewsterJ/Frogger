@@ -22,7 +22,6 @@ public class AudioControl : MonoBehaviour
     void Start()
     {
         activeSongIndex = Random.Range(0, gameplayMusic.Count);
-        gameplayMusic[activeSongIndex].Play();
     }
 
     // Update is called once per frame
