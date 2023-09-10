@@ -27,12 +27,6 @@ public class SpawnManager : MonoBehaviour
     {
         foreach (var entity in spawnedEntities)
         {
-            var spriteRenderer = entity.GetComponent<SpriteRenderer>();
-            if (spriteRenderer != null)
-            {
-                //spriteRenderer.enabled = false;
-            }
-
             Destroy(entity);
         }
 

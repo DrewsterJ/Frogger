@@ -20,11 +20,14 @@ public class PlayerController : MonoBehaviour
 
     public GameObject camera;
     private AudioControl audioControlScript;
+    public GameObject gameManager;
+    private GameManager gameManagerScript;
 
     private void Start()
     {
         uiScript = uiOverlay.GetComponent<UI>();
         audioControlScript = camera.GetComponent<AudioControl>();
+        gameManagerScript = gameManager.GetComponent<GameManager>();
     }
     
     void Update()
@@ -85,11 +88,11 @@ public class PlayerController : MonoBehaviour
         if (uiScript.lives <= 0)
         {
             audioControlScript.diedAudio.Play();
-            var spriteRenderer = GetComponent<SpriteRenderer>();
-            spriteRenderer.enabled = false;
+            //var spriteRenderer = GetComponent<SpriteRenderer>();
+            //spriteRenderer.enabled = false;
             audioControlScript.gameplayMusic[audioControlScript.activeSongIndex].Stop();
             audioControlScript.diedMusic.Play();
-            Destroy(this);
+            gameManagerScript.LostGame();
         }
         else
         {
@@ -104,10 +107,15 @@ public class PlayerController : MonoBehaviour
 
         if (uiScript.score == 3)
         {
+            gameManagerScript.WinGame();
             audioControlScript.wonMusic.Play();
+            audioControlScript.scoreAudio.Play();
         }
-        audioControlScript.scoreAudio.Play();
-        transform.position = startLocation;
+        else
+        {
+            audioControlScript.scoreAudio.Play();
+            transform.position = startLocation;
+        }
     }
 
     private void HandleFloatingObjectCollision(Collider floatingObject)
