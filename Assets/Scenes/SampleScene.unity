@@ -592,6 +592,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiOverlay: {fileID: 1291599718}
   camera: {fileID: 519420028}
+  gameManager: {fileID: 1620324543}
 --- !u!65 &142622111
 BoxCollider:
   m_ObjectHideFlags: 0
