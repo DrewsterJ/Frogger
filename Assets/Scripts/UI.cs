@@ -34,6 +34,9 @@ public class UI : MonoBehaviour
     [HideInInspector]
     public VisualElement victoryMenu;
     
+    [HideInInspector]
+    public Label lossMenuLabel;
+    
     void Start()
     {
         root = GetComponent<UIDocument>().rootVisualElement;
@@ -54,6 +57,8 @@ public class UI : MonoBehaviour
         victoryMenu.visible = false;
         victoryMenuLabel = root.Query<Label>("victoryMenuLabel");
         victoryMenuLabel.visible = false;
+        lossMenuLabel = root.Query<Label>("lossMenuLabel");
+        lossMenuLabel.visible = false;
 
         Button pauseMenuResumeButton = root.Query<Button>("pauseMenuResumeButton");
         Button pauseMenuSettingsButton = root.Query<Button>("pauseMenuSettingsButton");
