@@ -10,7 +10,7 @@ public class UI : MonoBehaviour
     public int score = 0;
     
     private Label scoreText;
-    private List<VisualElement> hearts = new List<VisualElement>();
+    public List<VisualElement> hearts = new List<VisualElement>();
     public VisualElement root;
 
     [HideInInspector]
@@ -22,6 +22,12 @@ public class UI : MonoBehaviour
     [HideInInspector]
     public VisualElement pauseMenu;
     
+    [HideInInspector]
+    public Label mainMenuLabel;
+    
+    [HideInInspector]
+    public VisualElement mainMenu;
+    
     void Start()
     {
         root = GetComponent<UIDocument>().rootVisualElement;
@@ -32,17 +38,26 @@ public class UI : MonoBehaviour
         pauseMenu = root.Query<VisualElement>("pauseMenu");
         pauseMenu.visible = false;
         scoreText.text = "Score: " + score;
+        mainMenu = root.Query<VisualElement>("mainMenu");
+        mainMenu.visible = true;
         pauseMenuLabel = root.Query<Label>("pauseMenuLabel");
         pauseMenuLabel.visible = false;
+        mainMenuLabel = root.Query<Label>("mainMenuLabel");
+        mainMenuLabel.visible = false;
 
-        Button resumeButton = root.Query<Button>("resumeButton");
-        Button settingsButton = root.Query<Button>("settingsButton");
-        Button quitButton = root.Query<Button>("quitButton");
+        Button pauseMenuResumeButton = root.Query<Button>("pauseMenuResumeButton");
+        Button pauseMenuSettingsButton = root.Query<Button>("pauseMenuSettingsButton");
+        Button pauseMenuQuitButton = root.Query<Button>("pauseMenuQuitButton");
+        Button mainMenuStartButton = root.Query<Button>("mainMenuStartButton");
+        Button mainMenuSettingsButton = root.Query<Button>("mainMenuSettingsButton");
+        Button mainMenuQuitButton = root.Query<Button>("mainMenuQuitButton");
 
         gameManagerScript = gameManager.GetComponent<GameManager>();
 
-        resumeButton.clicked += () => gameManagerScript.SwitchPause();
-        quitButton.clicked += Application.Quit;
+        pauseMenuResumeButton.clicked += () => gameManagerScript.SwitchPause();
+        pauseMenuQuitButton.clicked += () => gameManagerScript.StopGame();
+        mainMenuStartButton.clicked += () => gameManagerScript.StartGame();
+        mainMenuQuitButton.clicked += Application.Quit;
     }
 
     public void UpdateScore()
