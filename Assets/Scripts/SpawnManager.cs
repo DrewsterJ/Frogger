@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 public class SpawnManager : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class SpawnManager : MonoBehaviour
     public List<GameObject> leftSideSpawnPoints;
     public List<GameObject> leftMovingGameObjects;
     public List<GameObject> rightMovingGameObjects;
+    public List<GameObject> spawnedEntities;
     private const float spawnRate = 1.2f;
     private bool gameIsActive;
     
@@ -16,8 +18,25 @@ public class SpawnManager : MonoBehaviour
     
     void Start()
     {
+        spawnedEntities = new List<GameObject>();
         gameIsActive = true;
         StartCoroutine(spawnEntities());
+    }
+
+    public void DeleteSpawnedEntities()
+    {
+        foreach (var entity in spawnedEntities)
+        {
+            var spriteRenderer = entity.GetComponent<SpriteRenderer>();
+            if (spriteRenderer != null)
+            {
+                //spriteRenderer.enabled = false;
+            }
+
+            Destroy(entity);
+        }
+
+        spawnedEntities.Clear();
     }
 
     private void SpawnLeftMovingEntity()
@@ -30,7 +49,7 @@ public class SpawnManager : MonoBehaviour
         index = Random.Range(0, leftMovingGameObjects.Count);
         var entity = leftMovingGameObjects[index];
 
-        Instantiate(entity, spawnPoint.transform.position, spawnPoint.transform.rotation);
+        spawnedEntities.Add(Instantiate(entity, spawnPoint.transform.position, spawnPoint.transform.rotation));
     }
 
     private void SpawnRightMovingEntity()
@@ -43,7 +62,7 @@ public class SpawnManager : MonoBehaviour
         index = Random.Range(0, rightMovingGameObjects.Count);
         var entity = rightMovingGameObjects[index];
 
-        Instantiate(entity, spawnPoint.transform.position, spawnPoint.transform.rotation);
+        spawnedEntities.Add(Instantiate(entity, spawnPoint.transform.position, spawnPoint.transform.rotation));
     }
 
     private IEnumerator spawnEntities()
