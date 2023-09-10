@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     // Offset for moving the character object
-    private const float offset = 0.55f;
+    private const float offset = 0.8f;
     
     // Game UI overlay objects
     public GameObject uiOverlay;
@@ -22,6 +22,11 @@ public class PlayerController : MonoBehaviour
     private AudioControl audioControlScript;
     public GameObject gameManager;
     private GameManager gameManagerScript;
+
+    public Sprite frogLeftSprite;
+    public Sprite frogRightSprite;
+    public Sprite frogForwardSprite;
+    public Sprite frogBackwardSprite;
 
     private void Start()
     {
@@ -50,6 +55,11 @@ public class PlayerController : MonoBehaviour
         // Move left
         if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
         {
+            var spriteRenderer = GetComponent<SpriteRenderer>();
+            if (spriteRenderer.sprite != frogLeftSprite)
+            {
+                spriteRenderer.sprite = frogLeftSprite;
+            }
             transform.Translate(Vector2.left + new Vector2(-offset, 0));
             PlaySounds();
         }
@@ -57,6 +67,12 @@ public class PlayerController : MonoBehaviour
         // Move right
         else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
         {
+            var spriteRenderer = GetComponent<SpriteRenderer>();
+
+            if (spriteRenderer.sprite != frogRightSprite)
+            {
+                spriteRenderer.sprite = frogRightSprite;
+            }
             transform.Translate(Vector2.right + new Vector2(offset, 0));
             PlaySounds();
         }
@@ -64,6 +80,12 @@ public class PlayerController : MonoBehaviour
         // Move up
         if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
         {
+            var spriteRenderer = GetComponent<SpriteRenderer>();
+
+            if (spriteRenderer.sprite != frogForwardSprite)
+            {
+                spriteRenderer.sprite = frogForwardSprite;
+            }
             transform.Translate(Vector2.up + new Vector2(0, offset));
             PlaySounds();
         }
@@ -71,6 +93,12 @@ public class PlayerController : MonoBehaviour
         // Move down
         else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
         {
+            var spriteRenderer = GetComponent<SpriteRenderer>();
+
+            if (spriteRenderer.sprite != frogBackwardSprite)
+            {
+                spriteRenderer.sprite = frogBackwardSprite;
+            }
             transform.Translate(Vector2.down + new Vector2(0, -offset));
             PlaySounds();
         }
@@ -79,6 +107,8 @@ public class PlayerController : MonoBehaviour
     public void MoveBackToStart()
     {
         transform.position = startLocation;
+        var spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer.sprite = frogForwardSprite;
     }
 
     private void HandleWaterCollision()
@@ -88,8 +118,6 @@ public class PlayerController : MonoBehaviour
         if (uiScript.lives <= 0)
         {
             audioControlScript.diedAudio.Play();
-            //var spriteRenderer = GetComponent<SpriteRenderer>();
-            //spriteRenderer.enabled = false;
             audioControlScript.gameplayMusic[audioControlScript.activeSongIndex].Stop();
             audioControlScript.diedMusic.Play();
             gameManagerScript.LostGame();
