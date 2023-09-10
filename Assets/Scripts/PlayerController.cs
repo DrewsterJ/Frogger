@@ -88,11 +88,11 @@ public class PlayerController : MonoBehaviour
         if (uiScript.lives <= 0)
         {
             audioControlScript.diedAudio.Play();
-            var spriteRenderer = GetComponent<SpriteRenderer>();
-            spriteRenderer.enabled = false;
+            //var spriteRenderer = GetComponent<SpriteRenderer>();
+            //spriteRenderer.enabled = false;
             audioControlScript.gameplayMusic[audioControlScript.activeSongIndex].Stop();
             audioControlScript.diedMusic.Play();
-            Destroy(this);
+            gameManagerScript.LostGame();
         }
         else
         {
