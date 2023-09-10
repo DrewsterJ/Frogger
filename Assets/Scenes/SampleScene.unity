@@ -3189,6 +3189,7 @@ MonoBehaviour:
   lives: 3
   score: 0
   gameManager: {fileID: 1620324543}
+  camera: {fileID: 519420028}
 --- !u!1 &1301389906
 GameObject:
   m_ObjectHideFlags: 0
