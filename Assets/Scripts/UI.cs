@@ -28,6 +28,12 @@ public class UI : MonoBehaviour
     [HideInInspector]
     public VisualElement mainMenu;
     
+    [HideInInspector]
+    public Label victoryMenuLabel;
+    
+    [HideInInspector]
+    public VisualElement victoryMenu;
+    
     void Start()
     {
         root = GetComponent<UIDocument>().rootVisualElement;
@@ -44,6 +50,10 @@ public class UI : MonoBehaviour
         pauseMenuLabel.visible = false;
         mainMenuLabel = root.Query<Label>("mainMenuLabel");
         mainMenuLabel.visible = false;
+        victoryMenu = root.Query<VisualElement>("victoryMenu");
+        victoryMenu.visible = false;
+        victoryMenuLabel = root.Query<Label>("victoryMenuLabel");
+        victoryMenuLabel.visible = false;
 
         Button pauseMenuResumeButton = root.Query<Button>("pauseMenuResumeButton");
         Button pauseMenuSettingsButton = root.Query<Button>("pauseMenuSettingsButton");
@@ -51,6 +61,8 @@ public class UI : MonoBehaviour
         Button mainMenuStartButton = root.Query<Button>("mainMenuStartButton");
         Button mainMenuSettingsButton = root.Query<Button>("mainMenuSettingsButton");
         Button mainMenuQuitButton = root.Query<Button>("mainMenuQuitButton");
+        Button victoryRestartButton = root.Query<Button>("victoryRestartButton");
+        Button victoryMainMenuButton = root.Query<Button>("victoryMainMenuButton");
 
         gameManagerScript = gameManager.GetComponent<GameManager>();
 
@@ -58,6 +70,8 @@ public class UI : MonoBehaviour
         pauseMenuQuitButton.clicked += () => gameManagerScript.StopGame();
         mainMenuStartButton.clicked += () => gameManagerScript.StartGame();
         mainMenuQuitButton.clicked += Application.Quit;
+        victoryRestartButton.clicked += () => gameManagerScript.RestartGame();
+        victoryMainMenuButton.clicked += () => gameManagerScript.StopGame();
     }
 
     public void UpdateScore()
