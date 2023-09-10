@@ -18,6 +18,9 @@ public class UI : MonoBehaviour
 
     public GameObject gameManager;
     private GameManager gameManagerScript;
+
+    public GameObject camera;
+    private AudioControl audioControlScript;
     
     [HideInInspector]
     public VisualElement pauseMenu;
@@ -36,6 +39,10 @@ public class UI : MonoBehaviour
     
     [HideInInspector]
     public Label lossMenuLabel;
+
+    [HideInInspector] public VisualElement settingsMenu;
+
+    [HideInInspector] public Button muteUnmuteMusicButton;
     
     void Start()
     {
@@ -59,6 +66,10 @@ public class UI : MonoBehaviour
         victoryMenuLabel.visible = false;
         lossMenuLabel = root.Query<Label>("lossMenuLabel");
         lossMenuLabel.visible = false;
+        settingsMenu = root.Query<VisualElement>("settingsMenu");
+        settingsMenu.visible = false;
+
+        audioControlScript = camera.GetComponent<AudioControl>();
 
         Button pauseMenuResumeButton = root.Query<Button>("pauseMenuResumeButton");
         Button pauseMenuSettingsButton = root.Query<Button>("pauseMenuSettingsButton");
@@ -68,6 +79,9 @@ public class UI : MonoBehaviour
         Button mainMenuQuitButton = root.Query<Button>("mainMenuQuitButton");
         Button victoryRestartButton = root.Query<Button>("victoryRestartButton");
         Button victoryMainMenuButton = root.Query<Button>("victoryMainMenuButton");
+        Button closeSettingsMenuButton = root.Query<Button>("closeSettingsMenuButton");
+        Button playNextSongButton = root.Query<Button>("playNextSongButton");
+        muteUnmuteMusicButton = root.Query<Button>("muteUnmuteMusicButton");
 
         gameManagerScript = gameManager.GetComponent<GameManager>();
 
@@ -77,6 +91,11 @@ public class UI : MonoBehaviour
         mainMenuQuitButton.clicked += Application.Quit;
         victoryRestartButton.clicked += () => gameManagerScript.RestartGame();
         victoryMainMenuButton.clicked += () => gameManagerScript.StopGame();
+        pauseMenuSettingsButton.clicked += () => gameManagerScript.SwitchSettings();
+        mainMenuSettingsButton.clicked += () => gameManagerScript.SwitchSettings();
+        closeSettingsMenuButton.clicked += () => gameManagerScript.SwitchSettings();
+        playNextSongButton.clicked += () => audioControlScript.PlayNextGameplaySong();
+        muteUnmuteMusicButton.clicked += () => SwapMute();
     }
 
     public void UpdateScore()
@@ -91,5 +110,19 @@ public class UI : MonoBehaviour
         
         lives -= 1;
         hearts[lives].SetEnabled(false);
+    }
+
+    public void SwapMute()
+    {
+        if (audioControlScript.muted)
+        {
+            audioControlScript.UnmuteMusic();
+            muteUnmuteMusicButton.text = "Mute";
+        }
+        else
+        {
+            audioControlScript.MuteMusic();
+            muteUnmuteMusicButton.text = "Unmute";
+        }
     }
 }
