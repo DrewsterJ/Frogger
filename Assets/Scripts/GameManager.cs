@@ -22,6 +22,9 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     public static bool gameWon;
     
+    [HideInInspector]
+    public static bool gameLost;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -39,6 +42,7 @@ public class GameManager : MonoBehaviour
         uiScript.mainMenuLabel.visible = true;
         audioControlScript.mainMenuMusic.Play();
         gameWon = false;
+        gameLost = false;
     }
 
     public void StartGame()
@@ -51,6 +55,8 @@ public class GameManager : MonoBehaviour
         uiScript.mainMenuLabel.visible = false;
         audioControlScript.mainMenuMusic.Stop();
         audioControlScript.gameplayMusic[audioControlScript.activeSongIndex].Play();
+        audioControlScript.diedMusic.Stop();
+        uiScript.lossMenuLabel.visible = false;
         gameWon = false;
     }
 
@@ -71,6 +77,19 @@ public class GameManager : MonoBehaviour
         audioControlScript.gameplayMusic[audioControlScript.activeSongIndex].Stop();
         uiScript.victoryMenu.visible = true;
         uiScript.victoryMenuLabel.visible = true;
+    }
+
+    public void LostGame()
+    {
+        gameLost = true;
+        paused = true;
+        MoveForward.paused = true;
+        SpawnManager.paused = true;
+        PlayerController.paused = true;
+        audioControlScript.mainMenuMusic.Stop();
+        audioControlScript.gameplayMusic[audioControlScript.activeSongIndex].Stop();
+        uiScript.victoryMenu.visible = true;
+        uiScript.lossMenuLabel.visible = true;
     }
 
     public void StopGame()
@@ -95,6 +114,8 @@ public class GameManager : MonoBehaviour
         uiScript.score = 0;
         uiScript.victoryMenuLabel.visible = false;
         uiScript.victoryMenu.visible = false;
+        uiScript.lossMenuLabel.visible = false;
+        audioControlScript.diedMusic.Stop();
 
         foreach (var heartImage in uiScript.hearts)
         {
@@ -126,7 +147,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Escape) && gameWon == false)
+        if (Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Escape) && gameWon == false && gameLost == false)
         {
             SwitchPause();
         }
