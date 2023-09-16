@@ -20,7 +20,7 @@ public class SpawnManager : MonoBehaviour
     {
         spawnedEntities = new List<GameObject>();
         gameIsActive = true;
-        StartCoroutine(spawnEntities());
+        StartCoroutine(SpawnEntities());
     }
 
     public void DeleteSpawnedEntities()
@@ -59,7 +59,7 @@ public class SpawnManager : MonoBehaviour
         spawnedEntities.Add(Instantiate(entity, spawnPoint.transform.position, spawnPoint.transform.rotation));
     }
 
-    private IEnumerator spawnEntities()
+    private IEnumerator SpawnEntities()
     {
         while (gameIsActive)
         {
