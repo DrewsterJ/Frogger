@@ -11,8 +11,7 @@ TagManager:
   - VictorySquare
   - TopBoundary
   - BottomBoundary
-  - LeftBoundary
-  - RightBoundary
+  - SideBoundary
   layers:
   - Default
   - TransparentFX

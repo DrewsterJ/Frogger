@@ -658,7 +658,7 @@ GameObject:
   - component: {fileID: 177987819}
   m_Layer: 0
   m_Name: RightBorder
-  m_TagString: RightBoundary
+  m_TagString: SideBoundary
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -809,7 +809,7 @@ GameObject:
   - component: {fileID: 215109123}
   m_Layer: 0
   m_Name: LeftBorder
-  m_TagString: LeftBoundary
+  m_TagString: SideBoundary
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

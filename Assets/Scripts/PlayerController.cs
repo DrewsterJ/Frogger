@@ -204,11 +204,11 @@ public class PlayerController : MonoBehaviour
             }
             else if (hit.collider.CompareTag("TopBoundary"))
             {
-                Debug.Log("Hit a boundary");
+                transform.Translate(Vector2.down + new Vector2(0, -offset));
             }
             else if (hit.collider.CompareTag("BottomBoundary"))
             {
-                Debug.Log("Hit a boundary");
+                transform.Translate(Vector2.down + new Vector2(0, -offset));
             }
             else if (hit.collider.CompareTag("VictorySquare"))
             {
