@@ -107,8 +107,7 @@ public class PlayerController : MonoBehaviour
     public void MoveBackToStart()
     {
         transform.position = startLocation;
-        var spriteRenderer = GetComponent<SpriteRenderer>();
-        spriteRenderer.sprite = frogForwardSprite;
+        GetComponent<SpriteRenderer>().sprite = frogForwardSprite;
     }
 
     private void HandleWaterCollision()
@@ -194,9 +193,17 @@ public class PlayerController : MonoBehaviour
             {
                 HandleWaterCollision();
             }
-            else if (hit.collider.CompareTag("SideBoundary"))
+            else if (hit.collider.CompareTag("WaterBoundary"))
             {
-                Debug.Log("Hit a boundary");
+                HandleWaterCollision();
+            }
+            else if (hit.collider.CompareTag("LeftSideBoundary"))
+            {
+                transform.Translate(Vector2.right + new Vector2(offset, 0));
+            }
+            else if (hit.collider.CompareTag("RightSideBoundary"))
+            {
+                transform.Translate(Vector2.left + new Vector2(-offset, 0));
             }
             else if (hit.collider.CompareTag("TopBoundary"))
             {
