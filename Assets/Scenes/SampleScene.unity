@@ -552,7 +552,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 91f5632ad3ad93042aa8f3b167d95e0c, type: 3}
   m_Color: {r: 0.06410265, g: 1, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -593,6 +593,10 @@ MonoBehaviour:
   uiOverlay: {fileID: 1291599718}
   camera: {fileID: 519420028}
   gameManager: {fileID: 1620324543}
+  frogLeftSprite: {fileID: 21300000, guid: 6d9e3ace8baf9f547876f6568dd63970, type: 3}
+  frogRightSprite: {fileID: 21300000, guid: 9aaba64edc508214c9cea13a15b3e913, type: 3}
+  frogForwardSprite: {fileID: 21300000, guid: 91f5632ad3ad93042aa8f3b167d95e0c, type: 3}
+  frogBackwardSprite: {fileID: 21300000, guid: 6c6b50f6c72768b48b220944480697c2, type: 3}
 --- !u!65 &142622111
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -998,6 +1002,7 @@ MonoBehaviour:
   - {fileID: 1809489896}
   - {fileID: 1217156082}
   - {fileID: 1673903564}
+  muted: 0
   activeSongIndex: 0
 --- !u!1 &521042542
 GameObject:
