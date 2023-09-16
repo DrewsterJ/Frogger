@@ -11,6 +11,11 @@ public class MoveForward : MonoBehaviour
     [HideInInspector]
     public static bool paused;
 
+    void Start()
+    {
+        StartCoroutine(AutoDestroy());
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -24,5 +29,11 @@ public class MoveForward : MonoBehaviour
         {
             transform.Translate(Vector2.right * (Time.deltaTime * speed));
         }
+    }
+
+    private IEnumerator AutoDestroy()
+    {
+        yield return new WaitForSeconds(12);
+        Destroy(gameObject);
     }
 }
