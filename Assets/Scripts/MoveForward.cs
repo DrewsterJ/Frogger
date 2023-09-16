@@ -33,7 +33,7 @@ public class MoveForward : MonoBehaviour
 
     private IEnumerator AutoDestroy()
     {
-        yield return new WaitForSeconds(12);
+        yield return new WaitForSeconds(13);
         Destroy(gameObject);
     }
 }
