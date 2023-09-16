@@ -204,7 +204,7 @@ public class PlayerController : MonoBehaviour
             }
             else if (hit.collider.CompareTag("BottomBoundary"))
             {
-                transform.Translate(Vector2.down + new Vector2(0, -offset));
+                transform.Translate(Vector2.up + new Vector2(0, offset));
             }
             else if (hit.collider.CompareTag("VictorySquare"))
             {
