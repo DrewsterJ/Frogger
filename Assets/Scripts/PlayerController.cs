@@ -194,6 +194,22 @@ public class PlayerController : MonoBehaviour
             {
                 HandleWaterCollision();
             }
+            else if (hit.collider.CompareTag("LeftBoundary"))
+            {
+                Debug.Log("Hit a boundary");
+            }
+            else if (hit.collider.CompareTag("RightBoundary"))
+            {
+                Debug.Log("Hit a boundary");
+            }
+            else if (hit.collider.CompareTag("TopBoundary"))
+            {
+                Debug.Log("Hit a boundary");
+            }
+            else if (hit.collider.CompareTag("BottomBoundary"))
+            {
+                Debug.Log("Hit a boundary");
+            }
             else if (hit.collider.CompareTag("VictorySquare"))
             {
                 HandleVictorySquareCollision(hit.collider);
