@@ -132,7 +132,7 @@ public class PlayerController : MonoBehaviour
     {
         uiScript.UpdateScore();
 
-        if (uiScript.score == 3)
+        if (uiScript.score == 5)
         {
             gameManagerScript.WinGame();
             audioControlScript.wonMusic.Play();
