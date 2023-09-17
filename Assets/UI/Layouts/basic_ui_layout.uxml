@@ -12,13 +12,13 @@
         <ui:Button text="Settings" parse-escape-sequences="true" display-tooltip-when-elided="true" name="pauseMenuSettingsButton" class="button" style="color: rgb(0, 0, 0);" />
         <ui:Button text="Quit" parse-escape-sequences="true" display-tooltip-when-elided="true" name="pauseMenuQuitButton" class="button" style="color: rgb(0, 0, 0);" />
     </ui:VisualElement>
-    <ui:VisualElement name="mainMenu" focusable="false" class="button" style="flex-grow: 1; position: absolute; height: 220px; width: 223px; top: 193px; left: 568px; right: auto; align-items: stretch; justify-content: center; background-color: rgb(202, 154, 22); visibility: hidden;">
+    <ui:VisualElement name="mainMenu" focusable="false" class="button" style="flex-grow: 1; position: absolute; height: auto; width: auto; top: auto; left: auto; right: auto; align-items: stretch; justify-content: center; background-color: rgb(202, 154, 22); visibility: hidden;">
         <ui:Button text="Start" parse-escape-sequences="true" display-tooltip-when-elided="true" name="mainMenuStartButton" class="button" style="color: rgb(0, 0, 0);" />
         <ui:Button text="Settings" parse-escape-sequences="true" display-tooltip-when-elided="true" name="mainMenuSettingsButton" class="button" style="color: rgb(0, 0, 0);" />
         <ui:Button text="Quit" parse-escape-sequences="true" display-tooltip-when-elided="true" name="mainMenuQuitButton" class="button" style="color: rgb(0, 0, 0);" />
     </ui:VisualElement>
     <ui:Label tabindex="-1" text="Main Menu" parse-escape-sequences="true" display-tooltip-when-elided="true" name="mainMenuLabel" style="position: absolute; top: 127px; left: 569px; height: 40px; width: 215px; -unity-text-align: upper-center; color: rgb(0, 0, 0); font-size: 26px; -unity-text-outline-width: 1px; visibility: hidden;" />
-    <ui:VisualElement name="victoryMenu" focusable="false" class="button" style="flex-grow: 1; position: absolute; height: 220px; width: 223px; top: 193px; left: 568px; right: auto; align-items: stretch; justify-content: center; background-color: rgb(202, 154, 22); visibility: hidden;">
+    <ui:VisualElement name="victoryMenu" focusable="false" class="button" style="flex-grow: 1; position: absolute; height: 519px; width: 761px; top: 193px; left: 568px; right: auto; align-items: stretch; justify-content: center; background-color: rgb(202, 154, 22); visibility: hidden;">
         <ui:Button text="Restart" parse-escape-sequences="true" display-tooltip-when-elided="true" name="victoryRestartButton" class="button" style="color: rgb(0, 0, 0);" />
         <ui:Button text="Main Menu" parse-escape-sequences="true" display-tooltip-when-elided="true" name="victoryMainMenuButton" class="button" style="color: rgb(0, 0, 0);" />
     </ui:VisualElement>
