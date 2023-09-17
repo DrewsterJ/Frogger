@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class VictorySquare : MonoBehaviour
 {
-    public int id;
+    // Determines whether the victory square has already been collided with
+    public bool active = true;
     
     // Start is called before the first frame update
     void Start()
