@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -15,14 +12,13 @@ public class PlayerController : MonoBehaviour
     // Start location
     private readonly Vector3 startLocation = new Vector3(0, -8.23f, -9.33f);
     
-    [HideInInspector]
-    public static bool paused;
-
+    [HideInInspector] public static bool paused;
     public GameObject camera;
     private AudioControl audioControlScript;
     public GameObject gameManager;
     private GameManager gameManagerScript;
 
+    // Used to distinguish player movement direction
     public Sprite frogLeftSprite;
     public Sprite frogRightSprite;
     public Sprite frogForwardSprite;
@@ -104,13 +100,14 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    // Moves the player back to the start
     public void MoveBackToStart()
     {
         transform.position = startLocation;
-        var spriteRenderer = GetComponent<SpriteRenderer>();
-        spriteRenderer.sprite = frogForwardSprite;
+        GetComponent<SpriteRenderer>().sprite = frogForwardSprite;
     }
 
+    // Called when the player falls into the water
     private void HandleWaterCollision()
     {
         uiScript.UpdateLives();
@@ -129,11 +126,26 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    // Called when the player collides with a victory square
     private void HandleVictorySquareCollision(Collider victorySquare)
     {
-        uiScript.UpdateScore();
+        var victorySquareScript = victorySquare.GetComponent<VictorySquare>();
 
-        if (uiScript.score == 3)
+        // If the victory square has already been collided with
+        if (!victorySquareScript.active)
+        {
+            return;
+        }
+
+        // Set the victory square color to magneta
+        var victorySquareSprite = victorySquare.GetComponent<SpriteRenderer>();
+        victorySquareSprite.color = Color.magenta;
+        
+        // Disable the victory square
+        victorySquareScript.active = false;
+        
+        uiScript.UpdateScore();
+        if (uiScript.score == 5)
         {
             gameManagerScript.WinGame();
             audioControlScript.wonMusic.Play();
@@ -146,6 +158,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    // Called when the player is on top of a floating object
     private void HandleFloatingObjectCollision(Collider floatingObject)
     {
         var floatingObjectScript = floatingObject.GetComponent<MoveForward>();
@@ -171,7 +184,11 @@ public class PlayerController : MonoBehaviour
             }
             else if (hit.collider.CompareTag("VictorySquare"))
             {
-                audioControlScript.scoreAudio.Play();
+                var victorySquareScript = hit.collider.GetComponent<VictorySquare>();
+                if (victorySquareScript.active)
+                {
+                    audioControlScript.scoreAudio.Play();
+                }
             }
             else if (hit.collider.CompareTag("Turtle") || hit.collider.CompareTag("Crocodile") ||
                      hit.collider.CompareTag("Log"))
@@ -193,6 +210,26 @@ public class PlayerController : MonoBehaviour
             if (hit.collider.CompareTag("Water"))
             {
                 HandleWaterCollision();
+            }
+            else if (hit.collider.CompareTag("WaterBoundary"))
+            {
+                HandleWaterCollision();
+            }
+            else if (hit.collider.CompareTag("LeftSideBoundary"))
+            {
+                transform.Translate(Vector2.right + new Vector2(offset, 0));
+            }
+            else if (hit.collider.CompareTag("RightSideBoundary"))
+            {
+                transform.Translate(Vector2.left + new Vector2(-offset, 0));
+            }
+            else if (hit.collider.CompareTag("TopBoundary"))
+            {
+                transform.Translate(Vector2.down + new Vector2(0, -offset));
+            }
+            else if (hit.collider.CompareTag("BottomBoundary"))
+            {
+                transform.Translate(Vector2.up + new Vector2(0, offset));
             }
             else if (hit.collider.CompareTag("VictorySquare"))
             {

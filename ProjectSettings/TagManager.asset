@@ -9,6 +9,11 @@ TagManager:
   - Log
   - Turtle
   - VictorySquare
+  - TopBoundary
+  - BottomBoundary
+  - LeftSideBoundary
+  - RightSideBoundary
+  - WaterBoundary
   layers:
   - Default
   - TransparentFX

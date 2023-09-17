@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,16 +15,12 @@ public class GameManager : MonoBehaviour
     public GameObject player;
     private PlayerController playerControllerScript;
     
-    [HideInInspector]
-    public static bool paused;
-
+    public List<GameObject> victorySquares;
+    
+    [HideInInspector] public static bool paused;
     public static bool gameStarted;
-    
-    [HideInInspector]
-    public static bool gameWon;
-    
-    [HideInInspector]
-    public static bool gameLost;
+    [HideInInspector] public static bool gameWon;
+    [HideInInspector] public static bool gameLost;
     
     // Start is called before the first frame update
     void Start()
@@ -46,7 +41,6 @@ public class GameManager : MonoBehaviour
         audioControlScript.mainMenuMusic.Play();
         gameWon = false;
         gameLost = false;
-        
     }
 
     public void StartGame()
@@ -63,6 +57,15 @@ public class GameManager : MonoBehaviour
         uiScript.lossMenuLabel.visible = false;
         gameWon = false;
         gameStarted = true;
+        
+        // Resets victory squares
+        foreach (var square in victorySquares)
+        {
+            var victorySquareScript = square.GetComponent<VictorySquare>();
+            victorySquareScript.active = true;
+            var spriteRenderer = square.GetComponent<SpriteRenderer>();
+            spriteRenderer.color = Color.white;
+        }
     }
 
     public void RestartGame()
@@ -122,18 +125,29 @@ public class GameManager : MonoBehaviour
         uiScript.lossMenuLabel.visible = false;
         audioControlScript.diedMusic.Stop();
         gameStarted = false;
+        
+        // Resets victory squares
+        foreach (var square in victorySquares)
+        {
+            square.active = true;
+            var spriteRenderer = square.GetComponent<SpriteRenderer>();
+            spriteRenderer.color = Color.white;
+        }
 
+        // Resets player lives
         foreach (var heartImage in uiScript.hearts)
         {
             heartImage.SetEnabled(true);
         }
     }
 
+    // Used to hide/show the settings menu
     public void SwitchSettings()
     {
         uiScript.settingsMenu.visible = !uiScript.settingsMenu.visible;
     }
 
+    // Used to pause/resume the game
     public void SwitchPause()
     {
         paused = !paused;
@@ -159,7 +173,8 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if ((Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Escape)) && gameWon == false && gameLost == false && gameStarted == true)
+        // When the player presses "escape" or "p", the game will pause/unpause
+        if ((Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Escape)) && !gameWon && !gameLost && gameStarted)
         {
             SwitchPause();
         }

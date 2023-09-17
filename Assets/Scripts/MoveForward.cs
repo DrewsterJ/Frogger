@@ -1,17 +1,18 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MoveForward : MonoBehaviour
 {
     public float speed = 5.0f;
     public bool leftMoving;
-    
-    [HideInInspector]
-    public static bool paused;
+    [HideInInspector] public static bool paused;
 
-    // Update is called once per frame
+    void Start()
+    {
+        StartCoroutine(AutoDestroy());
+    }
+
+    // Constantly moves the entity to the left or right
     void Update()
     {
         if (paused) return;
@@ -24,5 +25,12 @@ public class MoveForward : MonoBehaviour
         {
             transform.Translate(Vector2.right * (Time.deltaTime * speed));
         }
+    }
+
+    // Automatically destroys the game object after 13 seconds (when it leaves the visible camera area)
+    private IEnumerator AutoDestroy()
+    {
+        yield return new WaitForSeconds(13);
+        Destroy(gameObject);
     }
 }
