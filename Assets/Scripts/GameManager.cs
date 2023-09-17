@@ -56,6 +56,7 @@ public class GameManager : MonoBehaviour
         audioControlScript.diedMusic.Stop();
         uiScript.lossMenuLabel.visible = false;
         gameWon = false;
+        gameLost = false;
         gameStarted = true;
         
         // Resets victory squares
