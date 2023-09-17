@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -15,14 +12,13 @@ public class PlayerController : MonoBehaviour
     // Start location
     private readonly Vector3 startLocation = new Vector3(0, -8.23f, -9.33f);
     
-    [HideInInspector]
-    public static bool paused;
-
+    [HideInInspector] public static bool paused;
     public GameObject camera;
     private AudioControl audioControlScript;
     public GameObject gameManager;
     private GameManager gameManagerScript;
 
+    // Used to distinguish player movement direction
     public Sprite frogLeftSprite;
     public Sprite frogRightSprite;
     public Sprite frogForwardSprite;
@@ -104,12 +100,14 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    // Moves the player back to the start
     public void MoveBackToStart()
     {
         transform.position = startLocation;
         GetComponent<SpriteRenderer>().sprite = frogForwardSprite;
     }
 
+    // Called when the player falls into the water
     private void HandleWaterCollision()
     {
         uiScript.UpdateLives();
@@ -128,15 +126,18 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    // Called when the player collides with a victory square
     private void HandleVictorySquareCollision(Collider victorySquare)
     {
         var victorySquareScript = victorySquare.GetComponent<VictorySquare>();
 
+        // If the victory square has already been collided with
         if (!victorySquareScript.active)
         {
             return;
         }
 
+        // Set the victory square color to magneta
         var victorySquareSprite = victorySquare.GetComponent<SpriteRenderer>();
         victorySquareSprite.color = Color.magenta;
         
@@ -144,7 +145,6 @@ public class PlayerController : MonoBehaviour
         victorySquareScript.active = false;
         
         uiScript.UpdateScore();
-        
         if (uiScript.score == 5)
         {
             gameManagerScript.WinGame();
@@ -158,6 +158,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    // Called when the player is on top of a floating object
     private void HandleFloatingObjectCollision(Collider floatingObject)
     {
         var floatingObjectScript = floatingObject.GetComponent<MoveForward>();

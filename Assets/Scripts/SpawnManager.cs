@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Assertions;
 
 public class SpawnManager : MonoBehaviour
 {
@@ -13,8 +12,7 @@ public class SpawnManager : MonoBehaviour
     private const float spawnRate = 1.2f;
     private bool gameIsActive;
     
-    [HideInInspector]
-    public static bool paused;
+    [HideInInspector] public static bool paused;
     
     void Start()
     {
@@ -33,39 +31,48 @@ public class SpawnManager : MonoBehaviour
         spawnedEntities.Clear();
     }
 
+    // Spawns entities on the right-side spawn points
     private void SpawnLeftMovingEntity()
     {
         if (!gameIsActive) return;
         
+        // Select a random right-side spawn point
         var index = Random.Range(0, rightSideSpawnPoints.Count);
         var spawnPoint = rightSideSpawnPoints[index];
 
+        // Select a random entity
         index = Random.Range(0, leftMovingGameObjects.Count);
         var entity = leftMovingGameObjects[index];
 
+        // Spawn the random entity on the right-side of the map
         spawnedEntities.Add(Instantiate(entity, spawnPoint.transform.position, spawnPoint.transform.rotation));
     }
 
+    // Spawn entities on the left-side spawn points
     private void SpawnRightMovingEntity()
     {
         if (!gameIsActive) return;
         
+        // Select a random left-side spawn point
         var index = Random.Range(0, leftSideSpawnPoints.Count);
         var spawnPoint = leftSideSpawnPoints[index];
 
+        // Select a random entity
         index = Random.Range(0, rightMovingGameObjects.Count);
         var entity = rightMovingGameObjects[index];
 
+        // Spawn the random entity on the left-side of the map
         spawnedEntities.Add(Instantiate(entity, spawnPoint.transform.position, spawnPoint.transform.rotation));
     }
 
+    // Coroutine to continuously spawn entities while the game is active
     private IEnumerator SpawnEntities()
     {
         while (gameIsActive)
         {
             yield return new WaitForSeconds(spawnRate);
             if (paused)
-            {
+            { 
                 continue;
             }
 

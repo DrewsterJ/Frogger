@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,7 +5,6 @@ public class AudioControl : MonoBehaviour
 {
     public AudioSource grassMovementAudio;
     public AudioSource otherMovementAudio;
-    public AudioSource otherHurtAudio;
     public AudioSource waterHurtAudio;
     public AudioSource diedAudio;
     public AudioSource wonMusic;
@@ -40,6 +38,7 @@ public class AudioControl : MonoBehaviour
         }
     }
 
+    // Mutes gameplay music
     public void MuteMusic()
     {
         muted = true;
@@ -50,6 +49,7 @@ public class AudioControl : MonoBehaviour
         mainMenuMusic.volume = 0;
     }
 
+    // Unmutes gameplay music
     public void UnmuteMusic()
     {
         muted = false;

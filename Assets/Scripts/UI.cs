@@ -1,46 +1,27 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 public class UI : MonoBehaviour
 {
     public int lives = 3;
-    public int score = 0;
+    public int score;
     
     public List<VisualElement> hearts = new List<VisualElement>();
     public VisualElement root;
-
-    [HideInInspector]
-    public Label pauseMenuLabel;
-
     public GameObject gameManager;
     private GameManager gameManagerScript;
-
     public GameObject camera;
     private AudioControl audioControlScript;
     
-    [HideInInspector]
-    public VisualElement pauseMenu;
-    
-    [HideInInspector]
-    public Label mainMenuLabel;
-    
-    [HideInInspector]
-    public VisualElement mainMenu;
-    
-    [HideInInspector]
-    public Label victoryMenuLabel;
-    
-    [HideInInspector]
-    public VisualElement victoryMenu;
-    
-    [HideInInspector]
-    public Label lossMenuLabel;
-
+    [HideInInspector] public Label pauseMenuLabel;
+    [HideInInspector] public VisualElement pauseMenu;
+    [HideInInspector] public Label mainMenuLabel;
+    [HideInInspector] public VisualElement mainMenu;
+    [HideInInspector] public Label victoryMenuLabel;
+    [HideInInspector] public VisualElement victoryMenu;
+    [HideInInspector] public Label lossMenuLabel;
     [HideInInspector] public VisualElement settingsMenu;
-
     [HideInInspector] public Button muteUnmuteMusicButton;
     
     void Start()
@@ -67,6 +48,7 @@ public class UI : MonoBehaviour
         settingsMenu.visible = false;
 
         audioControlScript = camera.GetComponent<AudioControl>();
+        gameManagerScript = gameManager.GetComponent<GameManager>();
 
         Button pauseMenuResumeButton = root.Query<Button>("pauseMenuResumeButton");
         Button pauseMenuSettingsButton = root.Query<Button>("pauseMenuSettingsButton");
@@ -79,9 +61,7 @@ public class UI : MonoBehaviour
         Button closeSettingsMenuButton = root.Query<Button>("closeSettingsMenuButton");
         Button playNextSongButton = root.Query<Button>("playNextSongButton");
         muteUnmuteMusicButton = root.Query<Button>("muteUnmuteMusicButton");
-
-        gameManagerScript = gameManager.GetComponent<GameManager>();
-
+        
         pauseMenuResumeButton.clicked += () => gameManagerScript.SwitchPause();
         pauseMenuQuitButton.clicked += () => gameManagerScript.StopGame();
         mainMenuStartButton.clicked += () => gameManagerScript.StartGame();
@@ -108,6 +88,7 @@ public class UI : MonoBehaviour
         hearts[lives].SetEnabled(false);
     }
 
+    // Used to mute/unmute game music
     public void SwapMute()
     {
         if (audioControlScript.muted)
