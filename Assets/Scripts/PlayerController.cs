@@ -130,8 +130,21 @@ public class PlayerController : MonoBehaviour
 
     private void HandleVictorySquareCollision(Collider victorySquare)
     {
-        uiScript.UpdateScore();
+        var victorySquareScript = victorySquare.GetComponent<VictorySquare>();
 
+        if (!victorySquareScript.active)
+        {
+            return;
+        }
+
+        var victorySquareSprite = victorySquare.GetComponent<SpriteRenderer>();
+        victorySquareSprite.color = Color.magenta;
+        
+        // Disable the victory square
+        victorySquareScript.active = false;
+        
+        uiScript.UpdateScore();
+        
         if (uiScript.score == 5)
         {
             gameManagerScript.WinGame();
@@ -170,7 +183,11 @@ public class PlayerController : MonoBehaviour
             }
             else if (hit.collider.CompareTag("VictorySquare"))
             {
-                audioControlScript.scoreAudio.Play();
+                var victorySquareScript = hit.collider.GetComponent<VictorySquare>();
+                if (victorySquareScript.active)
+                {
+                    audioControlScript.scoreAudio.Play();
+                }
             }
             else if (hit.collider.CompareTag("Turtle") || hit.collider.CompareTag("Crocodile") ||
                      hit.collider.CompareTag("Log"))
