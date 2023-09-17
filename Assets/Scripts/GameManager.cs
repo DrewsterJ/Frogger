@@ -16,6 +16,8 @@ public class GameManager : MonoBehaviour
     public GameObject player;
     private PlayerController playerControllerScript;
     
+    public List<GameObject> victorySquares;
+    
     [HideInInspector]
     public static bool paused;
 
