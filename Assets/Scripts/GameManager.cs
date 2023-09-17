@@ -65,6 +65,14 @@ public class GameManager : MonoBehaviour
         uiScript.lossMenuLabel.visible = false;
         gameWon = false;
         gameStarted = true;
+        
+        foreach (var square in victorySquares)
+        {
+            var victorySquareScript = square.GetComponent<VictorySquare>();
+            victorySquareScript.active = true;
+            var spriteRenderer = square.GetComponent<SpriteRenderer>();
+            spriteRenderer.color = Color.white;
+        }
     }
 
     public void RestartGame()
@@ -124,6 +132,13 @@ public class GameManager : MonoBehaviour
         uiScript.lossMenuLabel.visible = false;
         audioControlScript.diedMusic.Stop();
         gameStarted = false;
+        
+        foreach (var square in victorySquares)
+        {
+            square.active = true;
+            var spriteRenderer = square.GetComponent<SpriteRenderer>();
+            spriteRenderer.color = Color.white;
+        }
 
         foreach (var heartImage in uiScript.hearts)
         {
